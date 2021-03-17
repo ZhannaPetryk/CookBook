@@ -1,0 +1,19 @@
+@model Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary
+
+@if(!Model.IsValid)
+{
+    <div class="validation-summary-errors">
+        <ul class="list-group">
+            @foreach (var modelError in 
+                Model.SelectMany(keyValuePair => keyValuePair.Value.Errors))
+            {
+                <li class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @modelError.ErrorMessage
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                </li>
+            }
+        </ul>
+    </div>
+}

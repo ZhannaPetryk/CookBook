@@ -1,0 +1,40 @@
+﻿@model List<CookBook.DAL.Data.Entities.RecipeRevision>
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Revisions of \"" + Model.FirstOrDefault()?.Title + "\"";
+}
+
+<div class="container grid-striped recipe-revision-list">
+    <div class="row">
+        <table class="table table-striped">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">Date modify</th>
+              <th scope="col">Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+          @foreach (var item in Model)
+          {
+            <tr>
+              <th scope="row">
+                <a asp-controller="Revision" asp-action="GetRevision" asp-route-recipeId="@item.RecipeId" asp-route-revisionId="@item.Id" class="text-dark text-bold">@item.Id</a>
+              </th>
+              <td>
+                <a asp-controller="Revision" asp-action="GetRevision" asp-route-recipeId="@item.RecipeId" asp-route-revisionId="@item.Id">@item.Title</a>
+              </td>
+              <td>@item.DateModified.ToString("yyyy-MMM-dd HH:mm")</td>
+              <td>
+                <a asp-controller="Revision" asp-action="Delete"  asp-route-recipeId="@item.RecipeId" asp-route-revisionId="@item.Id" class="btn btn-outline-danger btn-sm w-75 m-1">
+                  <i class="fas fa-trash-alt"></i>Delete
+                </a>
+              </td>
+            </tr>
+          }
+          </tbody>
+        </table>
+    </div>
+</div>

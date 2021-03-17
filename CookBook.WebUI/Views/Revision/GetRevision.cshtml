@@ -1,0 +1,41 @@
+﻿@model CookBook.DAL.Data.Entities.RecipeRevision
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = Model.Title;
+}
+
+<div class="container recipe-view">
+    <div class="content-header">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <ul class="navbar-nav">
+                    <li class="nav-item mr-2">
+                        <a class="btn btn-outline-danger btn-sm" asp-controller="Revision" asp-action="Delete"  asp-route-recipeId="@Model.RecipeId" asp-route-revisionId="@Model.Id">
+                            <span>Delete</span>
+                        </a>
+                    </li>
+                </ul>
+    
+            </nav>
+        </div>
+    <div class="bg-content">
+        <h2 id="date-modify" class="mt-2">
+            <span class="bd-content-title">Date modify:</span>
+        </h2>
+        <div class="date-modified">@Model.DateModified.ToString("yyyy-MMM-dd HH:mm")</div>
+        <h2 id="description" class="mt-2">
+            <span class="bd-content-title">Description:</span>
+        </h2>
+        <p>@Html.Raw(Model.Description)</p>
+        <h2 id="ingredient" class="mt-2">
+            <span class="bd-content-title">Ingredients:</span>
+        </h2>
+        <blockquote class="blockquote">
+            <p class="mb-0">@Html.Raw(Model.Ingredients)</p>
+        </blockquote>
+        <h2 id="direction" class="mt-2">
+            <span class="bd-content-title">Direction:</span>
+        </h2>
+        <p class="mb-0">@Html.Raw(Model.Directions)</p>
+    </div>
+</div>

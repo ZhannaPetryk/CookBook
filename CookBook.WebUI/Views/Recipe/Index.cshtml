@@ -1,0 +1,40 @@
+﻿@model List<RecipeModel>
+
+@{
+    Layout = "_Layout";
+}
+
+<div class="container grid-striped recipe-list">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 col-xs-12">
+                @{
+                    string description = item.Description != null && item.Description.Length >= 128 ? item.Description?.Substring(0, 128) + "..." : item.Description;
+                }
+                <div class="card recipe-card">
+                    <div class="card-body">
+                        <h5 class="card-title"><a asp-action="GetRecipe" asp-controller="Recipe" asp-route-recipeId="@item.Id">@item.Title</a></h5>
+                        <p class="card-text">@description</p>
+                        <p class="card-text text-secondary text-right"><em>@item.DateCreated.ToString("yyyy, dd MMM")</em></p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a asp-action="Edit" asp-controller="Recipe" asp-route-recipeId="@item.Id" class="btn btn-outline-success btn-sm w-75 m-1">
+                            <i class="fas fa-edit"></i>Edit
+                        </a>
+                            
+                        <a asp-action="Index" asp-controller="Revision" asp-route-recipeId="@item.Id" class="btn btn-outline-info btn-sm w-75 m-1">
+                            <i class="fab fa-rev"></i>Revisions
+                        </a>
+                            
+                        <a asp-action="Delete" asp-controller="Recipe" asp-route-recipeId="@item.Id" class="btn btn-outline-danger btn-sm w-75 m-1">
+                            <i class="fas fa-trash-alt"></i>Delete
+                        </a>
+                            
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

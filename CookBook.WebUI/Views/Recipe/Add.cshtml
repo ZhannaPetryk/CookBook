@@ -1,0 +1,33 @@
+﻿@model RecipeFormModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Create Recipe";
+}
+<div class="container recipe-form-add">
+    <form id="recipeForm" class="needs-validation" novalidate asp-antiforgery="true" asp-action="Add">
+        <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
+            <label asp-for="Title">Title:</label>
+            <input class="form-control" asp-for="Title" required>
+            <span asp-validation-for="Title" class="invalid-feedback"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description">Description:</label>
+            <textarea class="form-control" asp-for="Description" rows="5"></textarea>
+            <span asp-validation-for="Description" class="invalid-feedback"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Ingredients">Ingredients:</label>
+            <textarea class="form-control" asp-for="Ingredients" required rows="5"></textarea>
+            <span asp-validation-for="Ingredients" class="invalid-feedback"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Directions">Directions:</label>
+            <textarea class="form-control" asp-for="Directions" required rows="5"></textarea>
+            <span asp-validation-for="Directions" class="invalid-feedback"></span>
+        </div>
+        <input type="hidden" asp-for="ParentRecipeId"/>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

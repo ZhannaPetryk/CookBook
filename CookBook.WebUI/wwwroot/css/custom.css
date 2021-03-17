@@ -1,0 +1,60 @@
+﻿/* Sticky footer styles
+-------------------------------------------------- */
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	margin-bottom: 61px; /* Margin bottom by footer height */
+}
+
+.footer {
+	position: absolute;
+	bottom: 1px;
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.content.content-center{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+@media (max-width: 767px){
+	.hidden-phone{
+		display: none;	
+	}
+}
+
+.custom-combobox {
+	position: relative;
+	display: inline-block;
+}
+
+.custom-combobox-toggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-left: -1px;
+	padding: 0;
+}
+
+.custom-combobox-input {
+	margin: 0;
+	padding: 5px 10px;
+}
+
+
+.recipe-card .card-body {
+	min-height: 150px;
+}
+
+@media (max-width: 640px) {
+	.recipe-list > .row {
+		min-height: 180px;
+	}
+}

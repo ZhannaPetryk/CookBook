@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Routing
+@model RecipeModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = Model.Title;
+    ViewData["Breadcrumbs"] = "";
+    var parent = Model.ParentRecipe;
+    while (parent != null)
+    {
+        ViewData["Breadcrumbs"] = "<li class='breadcrumb-item'><a href='" + Url.Action("GetRecipe", "Recipe", new {recipeId = parent.Id}).ToString() + "'>" + parent.Title + "</a></li>" + ViewData["Breadcrumbs"];
+        parent = parent.ParentRecipe;
+    }
+}
+
+<div class="container recipe-view">
+    <div class="content-header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <ul class="navbar-nav">
+                <li class="nav-item mr-2">
+                    <a class="btn btn-outline-primary btn-sm" asp-controller="Recipe" asp-action="Add" asp-route-parentId="@Model.Id">
+                        <span>Add children recipe</span>
+                    </a>
+                </li>
+                <li class="nav-item mr-2">
+                    <a class="btn btn-outline-success btn-sm" asp-controller="Recipe" asp-action="Edit" asp-route-recipeId="@Model.Id">
+                        <span>Edit</span>
+                    </a>
+                </li>
+                <li class="nav-item mr-2">
+                    <a class="btn btn-outline-info btn-sm" asp-controller="Revision" asp-action="Index" asp-route-recipeId="@Model.Id">
+                        <span>View revisions</span>
+                    </a>
+                </li>
+                <li class="nav-item mr-2">
+                    <a class="btn btn-outline-danger btn-sm" asp-controller="Recipe" asp-action="Delete" asp-route-recipeId="@Model.Id">
+                        <span>Delete</span>
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+    </div>
+    <div class="bg-content">
+        <p>@Html.Raw(Model.Description)</p>
+        <h2 id="ingredient" class="mt-2">
+            <span class="bd-content-title">Ingredients:</span>
+        </h2>
+        <blockquote class="blockquote">
+            <p class="mb-0">@Html.Raw(Model.Ingredients)</p>
+        </blockquote>
+        <h2 id="direction" class="mt-2">
+            <span class="bd-content-title">Direction:</span>
+        </h2>
+        <p class="mb-0">@Html.Raw(Model.Directions)</p>
+    </div>
+</div>

@@ -1,0 +1,120 @@
+﻿@using CookBook.DAL
+@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewData["Title"] - The CookBook</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    @RenderSection("Styles", required: false)
+
+    @using Microsoft.AspNetCore.Identity
+    @inject UserManager<AdminUser> userManager
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css">
+    <!--Bootstrap 4 -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/lib/admin-lte/css/adminlte.min.css">
+
+    <link rel="stylesheet" href="~/css/custom.css">
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+    <!-- Header Menu -->
+    <a href="/" class="brand-link">
+        <img src="~/img/logo.png" alt="The CookBook" class="brand-image img-circle elevation-3">
+    </a>
+    <ul class="navbar-nav bd-navbar-nav flex-row">
+        <li class="nav-item">
+            <a class="nav-link" is-active-route asp-controller="Recipe" asp-action="Index">
+                <span>Recipes</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Recipe" asp-action="Add">
+                <span>Add Recipe</span>
+            </a>
+        </li>
+    </ul>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-md-auto">
+        <li class="nav-item mr-md-2">
+            <div class="user-panel d-flex">
+                <div class="image">
+                    <img src="~/img/image-logged-in-user.png" class="img-circle elevation-1" alt="User Image">
+                </div>
+                <div class="info">
+                    @{
+                        var user = await userManager.GetUserAsync(User);
+                        var displayName = user?.UserName;
+                    }
+
+                    <a href="#" class="d-block">@displayName</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item mr-md-2">
+            <a asp-controller="Account" asp-action="Logout" class="btn btn-danger btn-sm">
+                Log out
+            </a>
+        </li>
+    </ul>
+</nav>
+<!-- /.navbar -->
+
+<!-- Content Wrapper. Contains page content -->
+<main role="main" class="content pb-4">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-12">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">
+                            <a href="/">Home</a>
+                        </li>
+                        @Html.Raw(ViewData["Breadcrumbs"])
+                        <li class="breadcrumb-item active">@ViewData["Title"]</li>
+                    </ol>
+                </div>
+                <div class="col-sm-12">
+                    <h1 class="m-0 text-dark">@ViewData["Title"]</h1>
+                </div><!-- /.col -->
+                <!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+        @RenderBody()
+    </section>
+    <!-- /.content -->
+</main>
+<!-- /.content-wrapper -->
+<footer class="footer">
+    <div class="container">
+        <strong>Zhanna Petryk <a href="/">The CookBook</a>.</strong>
+    </div>
+</footer>
+<!-- /.control-sidebar -->
+
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="~/lib/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 JS -->
+<script src="~/lib/bootstrap/js/bootstrap.bundle.js"></script>
+
+@RenderSection("Scripts", required: false)
+</body>
+</html>
